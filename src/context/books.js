@@ -7,14 +7,19 @@ function Provider({ children }) {
   const [books, setBooks] = React.useState([]);
 
   const fetchBooks = React.useCallback(async () => {
-    const response = await axios.get("http://127.0.0.1:3004/books");
+    const response = await axios.get(
+      "https://books-project-data.onrender.com/books"
+    );
     setBooks(response.data);
   }, []);
 
   const editBookById = async (id, newTitle) => {
-    const response = await axios.put(`http://127.0.0.1:3004/books/${id}`, {
-      title: newTitle,
-    });
+    const response = await axios.put(
+      `https://books-project-data.onrender.com/books/${id}`,
+      {
+        title: newTitle,
+      }
+    );
 
     const updatedBooks = books.map((book) => {
       if (book.id === id) {
@@ -26,7 +31,9 @@ function Provider({ children }) {
   };
 
   const deleteBookById = async (id) => {
-    const response = await axios.delete(`http://127.0.0.1:3004/books/${id}`);
+    const response = await axios.delete(
+      `https://books-project-data.onrender.com/books/${id}`
+    );
 
     const updatedBooks = books.filter((book) => {
       return book.id !== id;
@@ -35,9 +42,12 @@ function Provider({ children }) {
   };
 
   const createBook = async (title) => {
-    const response = await axios.post("http://127.0.0.1:3004/books", {
-      title,
-    });
+    const response = await axios.post(
+      "https://books-project-data.onrender.com/books",
+      {
+        title,
+      }
+    );
     const updatedBooks = [...books, response.data];
     setBooks(updatedBooks);
   };
